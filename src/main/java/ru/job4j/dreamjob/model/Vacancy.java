@@ -44,6 +44,10 @@ public class Vacancy {
         return description;
     }
 
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
