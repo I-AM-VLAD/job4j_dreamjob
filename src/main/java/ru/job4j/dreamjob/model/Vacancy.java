@@ -11,6 +11,9 @@ public class Vacancy {
     private String description;
     private LocalDateTime creationDate = LocalDateTime.now().truncatedTo(ChronoUnit.MICROS);
 
+    public Vacancy() {
+    }
+
     public Vacancy(int id, String title, String description, LocalDateTime creationDate) {
         this.id = id;
         this.title = title;
