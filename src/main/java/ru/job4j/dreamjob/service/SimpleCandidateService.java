@@ -68,3 +68,4 @@ public class SimpleCandidateService implements CandidateService {
         return candidateRepository.findAll();
     }
 }
+
