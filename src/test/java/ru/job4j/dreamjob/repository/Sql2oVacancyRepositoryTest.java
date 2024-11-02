@@ -1,4 +1,3 @@
-/*
 package ru.job4j.dreamjob.repository;
 
 import org.junit.jupiter.api.AfterAll;
@@ -43,8 +42,7 @@ public class Sql2oVacancyRepositoryTest {
         sql2oVacancyRepository = new Sql2oVacancyRepository(sql2o);
         sql2oFileRepository = new Sql2oFileRepository(sql2o);
 
-        // нужно сохранить хотя бы один файл, т.к. Vacancy от него зависит
-        file = new File("test", "test");
+        file = new File("test1", "test1");
         sql2oFileRepository.save(file);
     }
 
@@ -122,5 +120,3 @@ public class Sql2oVacancyRepositoryTest {
         assertThat(isUpdated).isFalse();
     }
 }
-
- */

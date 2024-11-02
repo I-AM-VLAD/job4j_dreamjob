@@ -39,9 +39,11 @@ public class Sql2oVacancyRepository implements VacancyRepository {
         boolean result = false;
         try (var connection = sql2o.open()) {
             var query = connection.createQuery("DELETE FROM vacancies WHERE id = :id");
-            query.addParameter("id", id);
-            query.executeUpdate();
-            result = true;
+            if (id > 0) {
+                query.addParameter("id", id);
+                query.executeUpdate();
+                result = true;
+            }
         }
         return result;
     }
@@ -49,9 +51,9 @@ public class Sql2oVacancyRepository implements VacancyRepository {
     @Override
     public boolean update(Vacancy vacancy) {
         try (var connection = sql2o.open()) {
-            var sql = "UPDATE vacancies"
-                    + "SET title = :title, description = :description, creation_date = :creationDate,"
-                       + "visible = :visible, city_id = :cityId, file_id = :fileId"
+            var sql = "UPDATE vacancies "
+                    + "SET title = :title, description = :description, creation_date = :creationDate, "
+                       + "visible = :visible, city_id = :cityId, file_id = :fileId "
                     + "WHERE id = :id";
             var query = connection.createQuery(sql)
                     .addParameter("title", vacancy.getTitle())

@@ -20,7 +20,7 @@ public class Sql2oCandidateRepository implements CandidateRepository {
     @Override
     public Candidate save(Candidate candidate) {
         try (var connection = sql2o.open()) {
-            var sql = "INSERT INTO candidates(name, description, creation_date, city_id, file_id)"
+            var sql = "INSERT INTO candidates(name, description, creation_date, city_id, file_id) "
                     + "VALUES (:name, :description, :creationDate, :cityId, :fileId)";
             var query = connection.createQuery(sql, true)
                     .addParameter("name", candidate.getName())
@@ -39,9 +39,11 @@ public class Sql2oCandidateRepository implements CandidateRepository {
         boolean result = false;
         try (var connection = sql2o.open()) {
             var query = connection.createQuery("DELETE FROM candidates WHERE id = :id");
-            query.addParameter("id", id);
-            query.executeUpdate();
-            result = true;
+            if (id > 0) {
+                query.addParameter("id", id);
+                query.executeUpdate();
+                result = true;
+            }
         }
         return result;
     }
@@ -49,9 +51,9 @@ public class Sql2oCandidateRepository implements CandidateRepository {
     @Override
     public boolean update(Candidate candidate) {
         try (var connection = sql2o.open()) {
-            var sql = "UPDATE candidates"
-                    + "SET name = :name, description = :description, creation_date = :creationDate,"
-                    + "city_id = :cityId, file_id = :fileId"
+            var sql = "UPDATE candidates "
+                    + "SET name = :name, description = :description, creation_date = :creationDate, "
+                    + "city_id = :cityId, file_id = :fileId "
                     + "WHERE id = :id";
             var query = connection.createQuery(sql)
                     .addParameter("name", candidate.getName())
