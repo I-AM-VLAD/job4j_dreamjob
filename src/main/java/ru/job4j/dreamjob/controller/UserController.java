@@ -18,14 +18,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/register/{email}/{password}")
-    public String getRegistrationPage(Model model, @PathVariable String email, @PathVariable String password) {
-        var userOptional = userService.findByEmailAndPassword(email, password);
-        if (userOptional.isEmpty()) {
-            model.addAttribute("message", "Пользователя с такой почтой и паролем не существует");
-            return "errors/404";
-        }
-        return "redirect:/vacancies";
+    @GetMapping("/register")
+    public String getRegistrationPage() {
+        return "users/register";
     }
 
     @PostMapping("/register")
