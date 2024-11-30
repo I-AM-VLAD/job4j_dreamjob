@@ -33,7 +33,7 @@ public class Sql2oUserRepository implements UserRepository {
         } catch (Exception e) {
             LOGGER.error("Ошибка", e);
         }
-        return Optional.ofNullable(null);
+        return Optional.empty();
     }
 
     @Override
